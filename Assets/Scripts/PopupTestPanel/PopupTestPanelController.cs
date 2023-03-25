@@ -9,12 +9,18 @@ using UnityEngine.Events;
 public class PopupTestPanelController 
 {
     private PopupTestPanelView view;
+    private PopupSettingsScriptableObject popupSettingsSO;
+    private Transform popupParent;
 
-    public PopupTestPanelController(PopupTestPanelView popupTestPanelView)
+    public PopupTestPanelController(
+        PopupTestPanelView popupTestPanelView, PopupSettingsScriptableObject settings, Transform popupParent)
     {
         view = popupTestPanelView;
+        popupSettingsSO = settings; 
+        this.popupParent = popupParent;
         SetupPopupTypeDropdown();
         SetupPopupNumberDropdown();
+        SetupSpawnButtonAction();
     }
 
     private void SetupPopupTypeDropdown()
@@ -41,6 +47,7 @@ public class PopupTestPanelController
                 SetElementsVisibility(true, true, true, true);
                 break;
             default:
+                SetElementsVisibility(true, true, true, true);
                 Debug.Log($"Unknown popup type {(PopupType)index}");
                 break;
         }
@@ -64,5 +71,26 @@ public class PopupTestPanelController
             .Select(number => number.ToString())
             .ToList();
         view.PopupsToSpawnNumberDropdownOptions = numberRange;
+    }
+
+    private void SetupSpawnButtonAction()
+    {
+        view.SpawnPopupButtonAction = SpawnPopups;
+    }
+
+    private void SpawnPopups()
+    {
+        for (int i = 0; i < view.ChosenDropdownNumber; i++)
+        {
+            var popupData = PopupDataCreator.CreatePopupData(
+                view.ChosenPopupType,
+                view.TitleText,
+                view.ContentText,
+                view.ButtonText,
+                view.BackgroundImadeUrl,
+                view.ButtonImageUrl,
+                view.PopupButtonAction);
+            PopupQueue.GetInstance(popupSettingsSO, popupParent).AddToQueue(popupData);
+        }
     }
 }

@@ -2281,7 +2281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2358,6 +2358,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740217205}
   m_CullTransparentMesh: 1
+--- !u!224 &790771612 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+  m_PrefabInstance: {fileID: 1678386595263169655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &793435771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,7 +2854,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920476594}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -6654,8 +6659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b65724edeb93694cafebdbcee19ef03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupParent: {fileID: 1969914593}
+  popupParent: {fileID: 1969914594}
   popupTestPanelView: {fileID: 1726917787}
+  popupSettingsSO: {fileID: 11400000, guid: 448478a5651acaf47b802aea453af280, type: 2}
 --- !u!4 &1839991509
 Transform:
   m_ObjectHideFlags: 0
@@ -7022,7 +7028,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 790771612}
   m_Father: {fileID: 2134382495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7287,7 +7294,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -7539,3 +7546,156 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139062281}
   m_CullTransparentMesh: 1
+--- !u!1001 &1678386595263169655
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1969914594}
+    m_Modifications:
+    - target: {fileID: 1678386594755016409, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386594755016409, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386594755016409, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 214.33273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386594755016409, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -41.57502
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595000939531, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595351797162, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595351797162, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595351797162, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 214.33273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595351797162, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -153.6424
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -111.8517
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.760315
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 55.9258
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418283, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418284, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_Name
+      value: Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386595848418284, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386596008430358, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386596008430358, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386596008430358, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 214.33273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678386596008430358, guid: d437cc3c56ef48744a04453d187497ff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -70.75519
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d437cc3c56ef48744a04453d187497ff, type: 3}

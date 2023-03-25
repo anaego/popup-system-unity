@@ -24,7 +24,15 @@ public class PopupTestPanelView : MonoBehaviour
     [SerializeField] private GameObject popupButtonTextInputContainer;
     [SerializeField] private GameObject popupButtonImageUrlInputContainer;
 
-    public Button SpawnPopupButton => spawnPopupButton;
+    public PopupType ChosenPopupType => (PopupType)popupTypeDropdown.value;
+    public string TitleText => popupTitleTextInput.text;
+    public string ContentText => popupContentTextInput.text;
+    public string ButtonText => popupButtonTextInput.text;
+    public string BackgroundImadeUrl => popupBackgroundImageUrlInput.text;
+    public string ButtonImageUrl => popupButtonImageUrlInput.text;
+    // TODO add dropdown
+    public Action PopupButtonAction => null;
+    public int ChosenDropdownNumber => int.Parse(popupsNumberDropdown.options[popupsNumberDropdown.value].text);
 
     public List<string> PopupTypeDropdownOptions
     {
@@ -75,6 +83,13 @@ public class PopupTestPanelView : MonoBehaviour
         set
         {
             popupButtonImageUrlInputContainer.gameObject.SetActive(value);
+        }
+    }
+    public Action SpawnPopupButtonAction
+    {
+        set
+        {
+            spawnPopupButton.onClick.AddListener(value.Invoke);
         }
     }
 }

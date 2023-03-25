@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EntrypointView : MonoBehaviour
 {
-    [SerializeField] private GameObject popupParent;
+    [SerializeField] private Transform popupParent;
     [SerializeField] private PopupTestPanelView popupTestPanelView;
+    [SerializeField] private PopupSettingsScriptableObject popupSettingsSO;
 
     private void Awake()
     {
-        var popupTestPanelController = new PopupTestPanelController(popupTestPanelView);
+        var popupTestPanelController = new PopupTestPanelController(
+            popupTestPanelView, popupSettingsSO, popupParent);
     }
 }
