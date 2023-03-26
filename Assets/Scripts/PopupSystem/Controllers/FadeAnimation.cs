@@ -7,10 +7,10 @@ public class FadeAnimation
     private Sequence fadeSequence;
 
     public void Animate(
-        CanvasGroup canvasGroup, 
-        float fadeInDuration, 
-        float waitDuration, 
-        float fadeOutDuration, 
+        CanvasGroup canvasGroup,
+        float fadeInDuration,
+        float waitDuration,
+        float fadeOutDuration,
         Action onEnd)
     {
         fadeSequence = DOTween.Sequence()

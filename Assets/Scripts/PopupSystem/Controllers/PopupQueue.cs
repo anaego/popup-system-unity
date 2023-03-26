@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO add interface?
-public class PopupQueue 
+public class PopupQueue
 {
     private static PopupQueue instance;
-    
+
     private Queue<PopupData> popupQueue;
     private PopupPool popupPool;
 
@@ -20,7 +17,7 @@ public class PopupQueue
     private bool IsQueueEmpty => popupQueue.Count == 0;
 
     private PopupQueue()
-    { 
+    {
     }
 
     public static PopupQueue GetInstance(
@@ -71,12 +68,12 @@ public class PopupQueue
     {
         popupSettingsSO = settings;
         this.popupParent = popupParent;
-        this.effectPlayer= effectPlayer;
+        this.effectPlayer = effectPlayer;
         popupQueue = new Queue<PopupData>();
         popupPool = new PopupPool(
-            CreatePopupController, 
-            GetPopupController, 
-            ReleasePopupController, 
+            CreatePopupController,
+            GetPopupController,
+            ReleasePopupController,
             settings.MaxPopupsSimultaneously);
     }
 

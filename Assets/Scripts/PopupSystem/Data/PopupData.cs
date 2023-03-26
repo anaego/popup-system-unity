@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-
-public class PopupData 
+public class PopupData
 {
-    // TODO make readonly maybe?
     public string PopupTitle { get; set; }
     public string PopupContent { get; set; }
     public string ButtonText { get; set; }

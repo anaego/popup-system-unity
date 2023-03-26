@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class PopupController
 {
@@ -14,9 +11,9 @@ public class PopupController
 
     private bool isShown;
 
-    public bool IsShown 
-    { 
-        get => isShown; 
+    public bool IsShown
+    {
+        get => isShown;
         set
         {
             isShown = value;
@@ -53,12 +50,11 @@ public class PopupController
         {
             view.ButtonText = popupData.ButtonText;
         }
-        // TODO refactor this to execute at the same time ish
+        Task<Texture2D> bgImageTask = null;
+        Task<Texture2D> buttonImageTask = null;
         if (!String.IsNullOrEmpty(popupData.BackgroundImageUrl))
         {
-            var task = DownloadTexture(popupData.BackgroundImageUrl);
-            await task;
-            view.BackgroundImage = task.Result;
+            bgImageTask = DownloadTexture(popupData.BackgroundImageUrl);
         }
         else
         {
@@ -66,9 +62,7 @@ public class PopupController
         }
         if (!String.IsNullOrEmpty(popupData.ButtonImageUrl))
         {
-            var task = DownloadTexture(popupData.ButtonImageUrl);
-            await task;
-            view.ButtonImage = task.Result;
+            buttonImageTask = DownloadTexture(popupData.ButtonImageUrl);
         }
         else
         {
@@ -78,8 +72,22 @@ public class PopupController
         {
             SetupButtonAction(popupData.ButtonActionData, onEnd);
         }
+        if (bgImageTask != null)
+        {
+            await bgImageTask;
+            view.BackgroundImage = bgImageTask.Result;
+        }
+        if (buttonImageTask != null)
+        {
+            await buttonImageTask;
+            view.ButtonImage = buttonImageTask.Result;
+        }
         IsShown = true;
-        //TODO Extract method
+        SetupAnimation(popupData, onEnd);
+    }
+
+    private void SetupAnimation(PopupData popupData, Action<PopupController> onEnd)
+    {
         animation = new FadeAnimation();
         if (popupData.ButtonActionData != null)
         {
@@ -104,13 +112,13 @@ public class PopupController
                 view.ButtonAction = EmptyAction;
                 break;
             case PopupActionType.OpenUrl:
-                view.ButtonAction = () => OpenUrl(buttonActionData.ActionParameterText);
+                view.ButtonAction = () => WebController.OpenUrl(buttonActionData.ActionParameterText);
                 break;
             case PopupActionType.ClosePopup:
                 view.ButtonAction = () => EndImmediately(onEnd);
                 break;
             case PopupActionType.PlayAnimaOrEffect:
-                view.ButtonAction = () => SpawnEffect(buttonActionData.ActionParameterEffectType);
+                view.ButtonAction = () => PlayEffect(buttonActionData.ActionParameterEffectType);
                 break;
             case PopupActionType.CustomFromEditor:
                 view.ButtonAction = buttonActionData.CustomTestPanelAction;
@@ -128,8 +136,7 @@ public class PopupController
         }
     }
 
-    // TODO to different class?
-    private void SpawnEffect(ActionEffectType actionEffectType)
+    private void PlayEffect(ActionEffectType actionEffectType)
     {
         switch (actionEffectType)
         {
@@ -140,26 +147,13 @@ public class PopupController
                 effectPlayer.PlayEffect(actionEffectType);
                 break;
             case ActionEffectType.Random:
-                SpawnEffect((ActionEffectType)(new System.Random().Next(
+                PlayEffect((ActionEffectType)(new System.Random().Next(
                     2,
                     Enum.GetNames(typeof(ActionEffectType)).Length + 1)));
                 break;
             default:
                 Debug.Log($"Unknown Action Effect Type: {actionEffectType}");
                 break;
-        }
-    }
-
-    // TODO to different class
-    private void OpenUrl(string actionParameterText)
-    {
-        try
-        {
-            Application.OpenURL(actionParameterText);
-        }
-        catch(Exception ex)
-        {
-            Debug.LogError($"Request failed: {ex.Message}");
         }
     }
 
@@ -176,7 +170,7 @@ public class PopupController
     private void FadeOutAndEnd(Action<PopupController> onEnd)
     {
         animation.Animate(
-            view.CanvasGroup, 
+            view.CanvasGroup,
             settings.FadeOutDuration,
             () => EndPopup(onEnd));
     }
@@ -185,30 +179,5 @@ public class PopupController
     {
         IsShown = false;
         onEnd.Invoke(this);
-    }
-
-    // TODO To separate script
-    public async Task<Texture2D> DownloadTexture(string url)
-    {
-        try
-        {
-            using var www = UnityWebRequestTexture.GetTexture(url);
-            var operation = www.SendWebRequest();
-            while (!operation.isDone)
-            {
-                await Task.Yield();
-            }
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"Request failed: {www.error}");
-            }
-            var result = ((DownloadHandlerTexture)www.downloadHandler).texture;
-            return result;
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Request failed: {ex.Message}");
-            return default;
-        }
     }
 }

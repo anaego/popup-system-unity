@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using static TMPro.TMP_Dropdown;
-using UnityEngine.Events;
+using UnityEngine;
 
-public class PopupTestPanelController 
+public class PopupTestPanelController
 {
     private PopupTestPanelView view;
     private PopupSettingsScriptableObject popupSettingsSO;
@@ -14,13 +10,13 @@ public class PopupTestPanelController
     private EffectPlayerView effectPlayer;
 
     public PopupTestPanelController(
-        PopupTestPanelView popupTestPanelView, 
-        PopupSettingsScriptableObject settings, 
-        Transform popupParent, 
+        PopupTestPanelView popupTestPanelView,
+        PopupSettingsScriptableObject settings,
+        Transform popupParent,
         EffectPlayerView effectPlayer)
     {
         view = popupTestPanelView;
-        popupSettingsSO = settings; 
+        popupSettingsSO = settings;
         this.popupParent = popupParent;
         this.effectPlayer = effectPlayer;
         SetupPopupTypeDropdown();
@@ -61,9 +57,9 @@ public class PopupTestPanelController
     }
 
     private void SetElementsVisibility(
-        bool isPopupTitleTextInputActive, 
-        bool isPopupContentTextInputActive, 
-        bool isPopupButtonTextInputActive, 
+        bool isPopupTitleTextInputActive,
+        bool isPopupContentTextInputActive,
+        bool isPopupButtonTextInputActive,
         bool isPopupButtonImageUrlInputActive,
         bool isPopupButtonActionInputActive)
     {
@@ -137,10 +133,10 @@ public class PopupTestPanelController
     {
         for (int i = 0; i < view.ChosenDropdownNumber; i++)
         {
-            var buttonActionData = view.PopupButtonAction == PopupActionType.None 
-                ? null 
+            var buttonActionData = view.PopupButtonAction == PopupActionType.None
+                ? null
                 : new ButtonActionData(
-                    view.PopupButtonAction, 
+                    view.PopupButtonAction,
                     view.PopupButtonActionTextParameter,
                     view.PopupButtonActionEffectParameter,
                     view.CustomTestPanelAction);

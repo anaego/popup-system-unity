@@ -1,19 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Pool;
 
-public class PopupPool 
+public class PopupPool
 {
     private ObjectPool<PopupController> objectPool;
 
     public int ActivePopups => objectPool.CountActive;
 
     public PopupPool(
-        Func<PopupController> createFunc, 
-        Action<PopupController> actionOnGet, 
-        Action<PopupController> actionOnRelease, 
+        Func<PopupController> createFunc,
+        Action<PopupController> actionOnGet,
+        Action<PopupController> actionOnRelease,
         int defaultCapacity)
     {
         objectPool = new ObjectPool<PopupController>(

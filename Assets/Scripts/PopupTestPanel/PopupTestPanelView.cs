@@ -7,7 +7,6 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using static TMPro.TMP_Dropdown;
 
-// TODO mb remove "popup" from the var names
 public class PopupTestPanelView : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown popupTypeDropdown;

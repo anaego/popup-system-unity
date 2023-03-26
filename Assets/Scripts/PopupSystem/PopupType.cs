@@ -1,7 +1,6 @@
 ﻿public enum PopupType
 {
-    // TODO remove it and just add it in editor?
-    Random, 
+    Random,
     TitleNoContentNoButton,
     TitleNoContentButton,
     TitleContentButton
