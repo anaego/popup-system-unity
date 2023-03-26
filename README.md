@@ -1,13 +1,13 @@
 # popup-system-unity
 A test task to create a dynamic popup system
 
-- Create a short text document describing the development process
+A short text document describing the development process
 	- Important decisions you took and why
 		- To use unirx or some kind opf message system, same with zenject (opted for simplicity)
 		- How to organize architecture
 		- Optimizatiuon: object pool, how to avoid instantiating a destroying a lot
 	- Describe the problem you had to face
-		- Where should url be a setting - in an SO or in editor in the component?
+		- Where should url be a setting - in an SO or in editor in the component? (In the end, allowed setting it in the test panel itself)
 		- Dynamic asset loading from URL - how to make it work n async variant
 	- Elaborate what you would do if you had more time
 		- Image loading - choosing custom sprite on the test panel
