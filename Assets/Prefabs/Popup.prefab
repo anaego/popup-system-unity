@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1678386595000939529
@@ -622,6 +622,8 @@ MonoBehaviour:
   buttonImage: {fileID: 7665116818527259098}
   button: {fileID: 1678386596008430357}
   canvasGroup: {fileID: 4914246065339833892}
+  contentContainer: {fileID: 1678386594755016410}
+  buttonContainer: {fileID: 1678386596008430359}
 --- !u!225 &4914246065339833892
 CanvasGroup:
   m_ObjectHideFlags: 0

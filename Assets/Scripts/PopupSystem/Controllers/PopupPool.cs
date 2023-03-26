@@ -28,6 +28,5 @@ public class PopupPool
     public void ReleaseObjectToPool(PopupController popupToRelease)
     {
         objectPool.Release(popupToRelease);
-        Debug.Log("Object released");
     }
 }

@@ -11,7 +11,7 @@ public class PopupData
     public string ButtonText { get; set; }
     public string BackgroundImageUrl { get; set; }
     public string ButtonImageUrl { get; set; }
-    public Action ButtonAction { get; set; }
     public bool IsContentVisible { get; set; }
     public bool IsButtonVisible { get; set; }
+    public ButtonActionData ButtonActionData { get; set; }
 }

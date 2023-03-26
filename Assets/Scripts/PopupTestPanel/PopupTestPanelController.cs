@@ -11,14 +11,21 @@ public class PopupTestPanelController
     private PopupTestPanelView view;
     private PopupSettingsScriptableObject popupSettingsSO;
     private Transform popupParent;
+    private EffectPlayerView effectPlayer;
 
     public PopupTestPanelController(
-        PopupTestPanelView popupTestPanelView, PopupSettingsScriptableObject settings, Transform popupParent)
+        PopupTestPanelView popupTestPanelView, 
+        PopupSettingsScriptableObject settings, 
+        Transform popupParent, 
+        EffectPlayerView effectPlayer)
     {
         view = popupTestPanelView;
         popupSettingsSO = settings; 
         this.popupParent = popupParent;
+        this.effectPlayer = effectPlayer;
         SetupPopupTypeDropdown();
+        SetupPopupActionTypeDropdown();
+        SetupPopupActionEffectTypeDropdown();
         SetupPopupNumberDropdown();
         SetupSpawnButtonAction();
     }
@@ -37,17 +44,17 @@ public class PopupTestPanelController
         switch ((PopupType)index)
         {
             case PopupType.TitleNoContentNoButton:
-                SetElementsVisibility(true, false, false, false);
+                SetElementsVisibility(true, false, false, false, false);
                 break;
             case PopupType.TitleNoContentButton:
-                SetElementsVisibility(true, false, true, true);
+                SetElementsVisibility(true, false, true, true, true);
                 break;
             case PopupType.TitleContentButton:
             case PopupType.Random:
-                SetElementsVisibility(true, true, true, true);
+                SetElementsVisibility(true, true, true, true, true);
                 break;
             default:
-                SetElementsVisibility(true, true, true, true);
+                SetElementsVisibility(true, true, true, true, true);
                 Debug.Log($"Unknown popup type {(PopupType)index}");
                 break;
         }
@@ -57,12 +64,14 @@ public class PopupTestPanelController
         bool isPopupTitleTextInputActive, 
         bool isPopupContentTextInputActive, 
         bool isPopupButtonTextInputActive, 
-        bool isPopupButtonImageUrlInputActive)
+        bool isPopupButtonImageUrlInputActive,
+        bool isPopupButtonActionInputActive)
     {
         view.IsPopupTitleTextInputActive = isPopupTitleTextInputActive;
         view.IsPopupContentTextInputActive = isPopupContentTextInputActive;
         view.IsPopupButtonTextInputActive = isPopupButtonTextInputActive;
         view.IsPopupButtonImageUrlInputActive = isPopupButtonImageUrlInputActive;
+        view.IsPopupButtonActionInputActive = isPopupButtonActionInputActive;
     }
 
     private void SetupPopupNumberDropdown()
@@ -71,6 +80,52 @@ public class PopupTestPanelController
             .Select(number => number.ToString())
             .ToList();
         view.PopupsToSpawnNumberDropdownOptions = numberRange;
+    }
+
+    private void SetupPopupActionTypeDropdown()
+    {
+        var actionTypeList = Enum.GetValues(typeof(PopupActionType)).Cast<PopupActionType>()
+            .Select(actionType => actionType.ToString())
+            .ToList();
+        view.PopupActionDropdownOptions = actionTypeList;
+        view.OnPopupActionDropdownValueChanged = UpdateActionElementsVisibility;
+    }
+
+    private void UpdateActionElementsVisibility(int index)
+    {
+        switch ((PopupActionType)index)
+        {
+            case PopupActionType.OpenUrl:
+                SetActionElementsVisibility(true, false);
+                break;
+            case PopupActionType.ClosePopup:
+                SetActionElementsVisibility(false, false);
+                break;
+            case PopupActionType.PlayAnimaOrEffect:
+                SetActionElementsVisibility(false, true);
+                break;
+            case PopupActionType.Random:
+                SetActionElementsVisibility(true, true);
+                break;
+            default:
+                SetActionElementsVisibility(false, false);
+                Debug.Log($"Unknown popup action type {(PopupActionType)index}");
+                break;
+        }
+    }
+
+    private void SetActionElementsVisibility(bool isTextParameterInputActive, bool isEffectParameterInputActive)
+    {
+        view.IsTextParameterInputActive = isTextParameterInputActive;
+        view.IsEffectParameterInputActive = isEffectParameterInputActive;
+    }
+
+    private void SetupPopupActionEffectTypeDropdown()
+    {
+        var effectTypeList = Enum.GetValues(typeof(ActionEffectType)).Cast<ActionEffectType>()
+            .Select(actionType => actionType.ToString())
+            .ToList();
+        view.PopupActionEffectParameterDropdownOptions = effectTypeList;
     }
 
     private void SetupSpawnButtonAction()
@@ -82,6 +137,13 @@ public class PopupTestPanelController
     {
         for (int i = 0; i < view.ChosenDropdownNumber; i++)
         {
+            var buttonActionData = view.PopupButtonAction == PopupActionType.None 
+                ? null 
+                : new ButtonActionData(
+                    view.PopupButtonAction, 
+                    view.PopupButtonActionTextParameter,
+                    view.PopupButtonActionEffectParameter,
+                    view.CustomTestPanelAction);
             var popupData = PopupDataCreator.CreatePopupData(
                 view.ChosenPopupType,
                 view.TitleText,
@@ -89,8 +151,8 @@ public class PopupTestPanelController
                 view.ButtonText,
                 view.BackgroundImadeUrl,
                 view.ButtonImageUrl,
-                view.PopupButtonAction);
-            PopupQueue.GetInstance(popupSettingsSO, popupParent).AddToQueue(popupData);
+                buttonActionData);
+            PopupQueue.GetInstance(popupSettingsSO, popupParent, effectPlayer).AddToQueue(popupData);
         }
     }
 }

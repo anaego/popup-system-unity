@@ -11,7 +11,7 @@ public class PopupDataCreator
         string buttonText = null,
         string backgroundImageUrl = null,
         string buttonImageUrl = null,
-        Action buttonAction = null)
+        ButtonActionData buttonActionData = null)
     {
         var popupData = new PopupData()
         {
@@ -20,7 +20,7 @@ public class PopupDataCreator
             ButtonText = buttonText,
             BackgroundImageUrl = backgroundImageUrl,
             ButtonImageUrl = buttonImageUrl,
-            ButtonAction = buttonAction
+            ButtonActionData = buttonActionData
         };
         SetupPopupDataVisibility(popupType, popupData);
         return popupData;
@@ -30,7 +30,6 @@ public class PopupDataCreator
     {
         switch (popupType)
         {
-            
             case PopupType.TitleNoContentNoButton:
                 SetDataVisibility(popupData, false, false);
                 break;
@@ -45,7 +44,7 @@ public class PopupDataCreator
                 SetupPopupDataVisibility(
                     (PopupType)(new Random().Next(
                         1,
-                        Enum.GetNames(typeof(PopupType)).Length)),
+                        Enum.GetNames(typeof(PopupType)).Length + 1)),
                     popupData);
                 break;
         }
