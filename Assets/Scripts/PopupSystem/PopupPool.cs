@@ -8,6 +8,8 @@ public class PopupPool
 {
     private ObjectPool<PopupController> objectPool;
 
+    public int ActivePopups => objectPool.CountActive;
+
     public PopupPool(
         Func<PopupController> createFunc, 
         Action<PopupController> actionOnGet, 
@@ -26,5 +28,6 @@ public class PopupPool
     public void ReleaseObjectToPool(PopupController popupToRelease)
     {
         objectPool.Release(popupToRelease);
+        Debug.Log("Object released");
     }
 }

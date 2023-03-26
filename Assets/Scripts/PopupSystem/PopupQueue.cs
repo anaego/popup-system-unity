@@ -14,6 +14,9 @@ public class PopupQueue
     private PopupSettingsScriptableObject popupSettingsSO;
     private Transform popupParent;
 
+    private bool CanShowNewPopup => popupPool.ActivePopups < popupSettingsSO.MaxPopupsSimultaneously;
+    private bool IsQueueEmpty => popupQueue.Count == 0;
+
     private PopupQueue()
     { 
     }
@@ -30,16 +33,34 @@ public class PopupQueue
 
     public void AddToQueue(PopupData popupData)
     {
+        if (CanShowNewPopup && IsQueueEmpty)
+        {
+            Execute(popupData);
+            return;
+        }
         popupQueue.Enqueue(popupData);
-        // TODO TEMP!!!
-        ExecuteQueue();
     }
 
     public void ExecuteQueue()
     {
+        if (!CanShowNewPopup || IsQueueEmpty)
+        {
+            return;
+        }
         var popupData = popupQueue.Dequeue();
+        Execute(popupData);
+    }
+
+    private void Execute(PopupData popupData)
+    {
         var popupController = popupPool.GetObjectFromPool();
-        popupController.SetupViewWithData(popupData);
+        popupController.SetupViewWithData(popupData, OnObjectDone);
+    }
+
+    private void OnObjectDone(PopupController popupController)
+    {
+        popupPool.ReleaseObjectToPool(popupController);
+        ExecuteQueue();
     }
 
     private void InitializeQueue(PopupSettingsScriptableObject settings, Transform popupParent)
@@ -57,7 +78,7 @@ public class PopupQueue
     private PopupController CreatePopupController()
     {
         var popupView = UnityEngine.Object.Instantiate(popupSettingsSO.PopupViewPrefab, popupParent);
-        var popupController = new PopupController(popupView);
+        var popupController = new PopupController(popupView, popupSettingsSO);
         popupController.IsShown = false;
         return popupController;
     }

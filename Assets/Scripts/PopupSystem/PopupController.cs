@@ -8,6 +8,8 @@ using UnityEngine.Networking;
 public class PopupController
 {
     private PopupView view;
+    private PopupSettingsScriptableObject settings;
+    private FadeAnimation animation;
 
     private bool isShown;
 
@@ -21,9 +23,10 @@ public class PopupController
         }
     }
 
-    public PopupController(PopupView view)
+    public PopupController(PopupView view, PopupSettingsScriptableObject settings)
     {
         this.view = view;
+        this.settings = settings;
     }
 
     internal void SetLastVisually()
@@ -31,11 +34,20 @@ public class PopupController
         view.SetLastVisually();
     }
 
-    internal async void SetupViewWithData(PopupData popupData)
+    internal async void SetupViewWithData(PopupData popupData, Action<PopupController> onEnd)
     {
-        view.TitleText = popupData.PopupTitle;
-        view.ContentText = popupData.PopupTitle;
-        view.ButtonText = popupData.ButtonText;
+        if (!String.IsNullOrEmpty(popupData.PopupTitle))
+        {
+            view.TitleText = popupData.PopupTitle;
+        }
+        if (!String.IsNullOrEmpty(popupData.PopupContent))
+        {
+            view.ContentText = popupData.PopupContent;
+        }
+        if (!String.IsNullOrEmpty(popupData.ButtonText))
+        {
+            view.ButtonText = popupData.ButtonText;
+        }
         // TODO refactor this to execute at the same time ish
         if (!String.IsNullOrEmpty(popupData.BackgroundImageUrl))
         {
@@ -49,9 +61,41 @@ public class PopupController
             await task;
             view.ButtonImage = task.Result;
         }
-        view.ButtonAction = popupData.ButtonAction;
+        if (popupData.ButtonAction != null)
+        {
+            view.ButtonAction = popupData.ButtonAction;
+        }
         IsShown = true;
-        FadeAnimation.Animate(view.CanvasGroup, null);
+        animation = new FadeAnimation();
+        if (popupData.ButtonAction != null)
+        {
+            animation.Animate(
+                view.CanvasGroup,
+                settings.FadeInDuration);
+            view.ButtonAction = () => FadeOutAndEnd(onEnd);
+            return;
+        }
+        animation.Animate(
+            view.CanvasGroup,
+            settings.FadeInDuration,
+            settings.FadeWaitDuration,
+            settings.FadeOutDuration,
+            () => EndPopup(onEnd));
+    }
+
+    private void FadeOutAndEnd(Action<PopupController> onEnd)
+    {
+        animation.Animate(
+            view.CanvasGroup, 
+            settings.FadeWaitDuration, 
+            settings.FadeOutDuration,
+            () => EndPopup(onEnd));
+    }
+
+    private void EndPopup(Action<PopupController> onEnd)
+    {
+        IsShown = false;
+        onEnd.Invoke(this);
     }
 
     // TODO To separate script
