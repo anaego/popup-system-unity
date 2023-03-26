@@ -1,7 +1,7 @@
 # popup-system-unity
 A test task to create a dynamic popup system
 
-A short text document describing the development process
+- A short text document describing the development process
 	- Important decisions you took and why
 		- To use unirx or some kind opf message system, same with zenject (opted for simplicity)
 		- How to organize architecture
