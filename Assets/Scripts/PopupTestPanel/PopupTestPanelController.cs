@@ -97,7 +97,7 @@ public class PopupTestPanelController
             case PopupActionType.ClosePopup:
                 SetActionElementsVisibility(false, false);
                 break;
-            case PopupActionType.PlayAnimaOrEffect:
+            case PopupActionType.PlayAnimOrEffect:
                 SetActionElementsVisibility(false, true);
                 break;
             case PopupActionType.Random:

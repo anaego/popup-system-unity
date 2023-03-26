@@ -4,6 +4,6 @@
     Random,
     OpenUrl,
     ClosePopup,
-    PlayAnimaOrEffect,
+    PlayAnimOrEffect,
     CustomFromEditor
 }

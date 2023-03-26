@@ -117,7 +117,7 @@ public class PopupController
             case PopupActionType.ClosePopup:
                 view.ButtonAction = () => EndImmediately(onEnd);
                 break;
-            case PopupActionType.PlayAnimaOrEffect:
+            case PopupActionType.PlayAnimOrEffect:
                 view.ButtonAction = () => PlayEffect(buttonActionData.ActionParameterEffectType);
                 break;
             case PopupActionType.CustomFromEditor:
