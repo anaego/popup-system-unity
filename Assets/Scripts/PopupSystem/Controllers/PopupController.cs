@@ -54,7 +54,7 @@ public class PopupController
         Task<Texture2D> buttonImageTask = null;
         if (!String.IsNullOrEmpty(popupData.BackgroundImageUrl))
         {
-            bgImageTask = DownloadTexture(popupData.BackgroundImageUrl);
+            bgImageTask = WebController.DownloadTexture(popupData.BackgroundImageUrl);
         }
         else
         {
@@ -62,7 +62,7 @@ public class PopupController
         }
         if (!String.IsNullOrEmpty(popupData.ButtonImageUrl))
         {
-            buttonImageTask = DownloadTexture(popupData.ButtonImageUrl);
+            buttonImageTask = WebController.DownloadTexture(popupData.ButtonImageUrl);
         }
         else
         {
